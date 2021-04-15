@@ -22,3 +22,12 @@ serves a subset of the public API.
 
 So marvin-cli can either communicate with the public API or a desktop app
 instance.
+
+# Installation
+
+* Install deno
+* Clone repository
+* `./build`
+* Copy `marvin-cli` to your path
+
+Binaries will be provided in the future.
