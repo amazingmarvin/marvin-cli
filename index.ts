@@ -28,6 +28,7 @@ const cmdArgs = parse(Deno.args, {
     h: "help",
     o: "output",
     q: "quiet",
+    V: "version",
   },
   boolean: [
     "force",
