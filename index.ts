@@ -3,6 +3,7 @@ import { getOptions, setOptions } from "./options.ts";
 import { Params, Options } from "./types.ts";
 
 import add from "./commands/add.ts";
+import api from "./commands/api.ts";
 import backup from "./commands/backup.ts";
 import config from "./commands/config.ts";
 import help from "./commands/help.ts";
@@ -14,6 +15,7 @@ const VERSION = "0.1.0";
 
 const commands: Record<string, (params: Params, options: Options) => Promise<void>> = {
   add,
+  api,
   backup,
   config,
   help,
@@ -106,6 +108,7 @@ OPTIONS:
         Print version info
 
 COMMANDS:
+    api    - View API docs
     config - Get/set config values for marvin-cli
     add    - Add a Task, Project, or other
     update - Update a Task, Project, or other

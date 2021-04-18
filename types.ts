@@ -17,3 +17,12 @@ export type ResolvedOptions = {
   json: boolean,
   quiet: boolean,
 };
+
+export type APIEndpoint = {
+  title: string,
+  stability: string,
+  method: "GET" | "POST",
+  fullAccessNeeded: boolean,
+  description: string,
+  queryParams?: Record<string, string>, // query param => description
+};
