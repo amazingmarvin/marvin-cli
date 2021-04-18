@@ -106,13 +106,18 @@ OPTIONS:
         Print version info
 
 COMMANDS:
-    add     - Add a Task, Project, or other
-    config  - Get/set config values
-    update  - Update a Task, Project, or other
-    delete  - Delete a Task, Project, or other
-    backup  - Trigger backups
-    restore - Restore backups
-    help    - Help about any command
+    config - Get/set config values for marvin-cli
+    add    - Add a Task, Project, or other
+    update - Update a Task, Project, or other
+    delete - Delete a Task, Project, or other
+    help   - Help about any command
+
+DESKTOP COMMANDS:
+    run      - Start the desktop app
+    quickAdd - Open desktop quick add
+    backup   - Trigger backups
+    restore  - Restore backups
+    quit     - Shut down the app
 `.trim());
 
   /*console.log(`
