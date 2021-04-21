@@ -56,15 +56,17 @@ export default async function add(params: Params, cmdOpt: Options) {
   // marvin add task (???)
   if (params.length === 1 && (params[0] === "task" || params[0] === "project")) {
     // Invalid: if "add task" or "add project", user must give title as arg.
-    console.error(addHelp);
+    console.error(`Missing ${params[0]} title`);
     Deno.exit(1);
   }
 
+  // marvin add "example task +today"
   // marvin add task "example task +today"
-  if (params.length === 2 && params[0] === "task") {
+  if (params.length === 1 || (params.length === 2 && params[0] === "task")) {
     // Add a task by title.
     try {
-      const res = await post("/api/addTask", params[1].toString(), { "Content-Type": "text/plain" });
+      const taskTitle = params.length === 1 ? params[0].toString() : params[1].toString();
+      const res = await post("/api/addTask", taskTitle, { "Content-Type": "text/plain" });
       await printResult(res);
       Deno.exit(0);
     } catch (err) {
@@ -90,6 +92,7 @@ export default async function add(params: Params, cmdOpt: Options) {
 }
 
 export const addHelp = `
+marvin add <title> # Add a task
 marvin add [type] <title> # type is task or project
 marvin add --file=<path>
 
