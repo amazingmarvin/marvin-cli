@@ -21,6 +21,7 @@ export type ResolvedOptions = {
 export type APIEndpoint = {
   title: string,
   stability: string,
+  servedBy: "desktop" | "public" | "both",
   method: "GET" | "POST",
   fullAccessNeeded: boolean,
   description: string,

@@ -6,6 +6,7 @@ const endpoints: Record<string, APIEndpoint> = {
   test: {
     title: "Test credentials",
     stability: "stable",
+    servedBy: "both",
     method: "POST",
     fullAccessNeeded: false,
     description: `
@@ -20,6 +21,7 @@ __END__
   addTask: {
     title: "Create a task",
     stability: "stable, backwards-compatible changes expected",
+    servedBy: "both",
     method: "POST",
     fullAccessNeeded: false,
     description: `
@@ -90,6 +92,20 @@ curl -H "X-API-Token: $MARVIN_TOKEN" -XPOST -d '{"title": "Example API task +tod
 \`\`\`
 `.trim(),
   },
+  quickAdd: {
+    title: "Open Quick-Add",
+    stability: "upcoming",
+    servedBy: "desktop",
+    method: "POST",
+    fullAccessNeeded: false,
+    description: `
+Open the Quick-Add window for adding a task with auto-completion.
+
+__EXAMPLE__ quickAdd
+=> OK
+__END__
+`.trim(),
+  },
 };
 
 for (const name in endpoints) {
@@ -117,7 +133,8 @@ export default async function api(params: Params, cmdOpt: Options) {
   if (params.length === 0) {
     for (const name in endpoints) {
       const endpoint = endpoints[name];
-      console.log(`## ${endpoint.title}`);
+      const target = endpoint.servedBy === "desktop" ? " (Desktop API only)" : endpoint.servedBy === "public" ? " (Public API only)" : "";
+      console.log(`## ${endpoint.title}${target}`);
       console.log(`> ${endpoint.stability}`);
       console.log(endpoint.description);
       console.log();
