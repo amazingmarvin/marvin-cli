@@ -9,6 +9,7 @@ import config from "./commands/config.ts";
 import help from "./commands/help.ts";
 import ping from "./commands/ping.ts";
 import profile from "./commands/profile.ts";
+import quickAdd from "./commands/quickAdd.ts";
 import restore from "./commands/restore.ts";
 
 const VERSION = "0.1.0";
@@ -21,6 +22,7 @@ const commands: Record<string, (params: Params, options: Options) => Promise<voi
   help,
   ping,
   profile,
+  quickAdd,
   restore,
 };
 
