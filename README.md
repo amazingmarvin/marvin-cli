@@ -18,7 +18,8 @@ marvin add task "Example +today"
 
 But even more importantly, until now scripting wasn't possible for desktop
 users who disable cloud sync. As of 1.60.0 you can run a local API server which
-serves a subset of the public API.
+serves a subset of the public API, plus some bonus commands that only work on
+desktop.
 
 So marvin-cli can either communicate with the public API or a desktop app
 instance.
