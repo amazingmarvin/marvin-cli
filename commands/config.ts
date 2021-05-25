@@ -31,7 +31,6 @@ export default async function config(params: Params, cmdOpt: Options) {
     console.log(`apiToken: ${(options.apiToken || "").replace(/.{20}$/, "...")}`);
     console.log(`fullAccessToken: ${(options.fullAccessToken || "").replace(/.{20}$/, "...")}`);
     console.log(`target: ${options.target}`);
-    console.log(`json: ${options.json}`);
     console.log(`quiet: ${options.quiet}`);
     Deno.exit(0);
   }
