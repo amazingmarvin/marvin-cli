@@ -26,6 +26,8 @@ instance.
 
 # Installation
 
+Note: the build is currently broken. See https://github.com/denoland/deno/issues/10693
+
 * Install deno
 * Clone repository
 * `./build`
