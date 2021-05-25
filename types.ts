@@ -27,3 +27,30 @@ export type APIEndpoint = {
   description: string,
   queryParams?: Record<string, string>, // query param => description
 };
+
+export type Subtask = {
+  _id: string,
+  title: string,
+};
+
+export type Task = {
+  _id: string,
+  title: string,
+  done: boolean,
+  doneAt: number,
+  day: string,
+  dueDate: string,
+  labelIds: string[],
+  duration: number,
+  timeEstimate: number,
+  isStarred: number,
+  isFrogged: number,
+  plannedWeek: string|null,
+  plannedMonth: string|null,
+  isReward: boolean,
+  subtasks: Record<string, Subtask>,
+  note: string,
+  backburner: boolean,
+  isPinned: boolean,
+  dependsOn: Record<string, boolean>,
+};
