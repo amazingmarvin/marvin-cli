@@ -11,6 +11,7 @@ import ping from "./commands/ping.ts";
 import profile from "./commands/profile.ts";
 import quickAdd from "./commands/quickAdd.ts";
 import restore from "./commands/restore.ts";
+import today from "./commands/today.ts";
 
 const VERSION = "0.1.0";
 
@@ -24,6 +25,7 @@ const commands: Record<string, (params: Params, options: Options) => Promise<voi
   profile,
   quickAdd,
   restore,
+  today,
 };
 
 const cmdArgs = parse(Deno.args, {
@@ -41,6 +43,8 @@ const cmdArgs = parse(Deno.args, {
     "desktop", // Connect to desktop or fail (default is desktop with public API fallback)
     "public", // Don't attempt to connect to desktop (default is desktop with public API fallback)
     "json", // JSON output
+    "csv", // CSV output
+    "text", // text output
     "version",
   ],
   string: [
@@ -113,6 +117,7 @@ COMMANDS:
     api    - View API docs
     config - Get/set config values for marvin-cli
     add    - Add a Task, Project, or other
+    today  - List Tasks and Projects that are scheduled today
     update - Update a Task, Project, or other
     delete - Delete a Task, Project, or other
     help   - Help about any command
