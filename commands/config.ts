@@ -1,5 +1,5 @@
 import { existsSync, path } from "../deps.ts";
-import { getConfigDir, getOptions } from "../options.ts";
+import { getOptions } from "../options.ts";
 import { Params, Options } from "../types.ts";
 
 const whitelist = [
@@ -18,31 +18,21 @@ export default async function config(params: Params, cmdOpt: Options) {
   let currentConfig = { };
   const options = getOptions();
 
-  const configDir = getConfigDir();
-  if (!configDir) {
-    console.error("Config dir not found");
-    Deno.exit(1);
-  }
-
-  const configFile = path.join(configDir, "marvin-cli.json");
-
-  if (existsSync(configFile)) {
-    try {
-      const json = Deno.readTextFileSync(configFile);
-      currentConfig = JSON.parse(json);
-    } catch (err) {
-      console.error(`Failed to read config file ${configFile}`, err.message);
-      Deno.exit(1);
-    }
-  }
-
   if (cmdOpt.help) {
     console.log(configHelp);
     Deno.exit(0);
   }
 
   if (params.length === 0) {
-    console.log(options);
+    console.log(`port: ${options.port}`);
+    console.log(`host: ${options.host}`);
+    console.log(`publicPort: ${options.publicPort}`);
+    console.log(`publicHost: ${options.publicHost}`);
+    console.log(`apiToken: ${(options.apiToken || "").replace(/.{20}$/, "...")}`);
+    console.log(`fullAccessToken: ${(options.fullAccessToken || "").replace(/.{20}$/, "...")}`);
+    console.log(`target: ${options.target}`);
+    console.log(`json: ${options.json}`);
+    console.log(`quiet: ${options.quiet}`);
     Deno.exit(0);
   }
 
@@ -51,7 +41,7 @@ export default async function config(params: Params, cmdOpt: Options) {
     Deno.exit(1);
   }
 
-  const key = params[0];
+  const key = params[0].toString();
   let val: string|number|boolean = params[1];
 
   if (whitelist.indexOf(key.toString()) === -1) {
@@ -80,14 +70,9 @@ export default async function config(params: Params, cmdOpt: Options) {
     }
   }
 
-  const newConfig = {
-    ...currentConfig,
-    [key]: val,
-  };
-  const newJson = JSON.stringify(newConfig);
-  Deno.writeTextFileSync(configFile, newJson);
+  localStorage.setItem(key, JSON.stringify(val));
   if (!options.quiet) {
-    console.log(`Saved ${key}=${val} in ${configFile}`);
+    console.log(`Saved ${key}=${val}`);
   }
   Deno.exit(0);
 }
@@ -115,8 +100,7 @@ PROPERTIES:
 
     marvin config apiToken <your api token>
         Use the given API token by default so that you don't have to enter it
-        with each use of marvin-cli. This is stored in plain text in
-        ${getConfigDir()}/marvin-cli.json.
+        with each use of marvin-cli. This is stored in localStorage.
 
         There is no default apiToken. marvin-cli will exit with an error
         unless you supply it with the --api-token option with each run, or here
@@ -125,7 +109,7 @@ PROPERTIES:
     marvin config fullAccessToken <your full access token>
         Use the given full access token by default so that you don't have to
         enter it with each use of an API endpoint that requires it. This is
-        stored in plain text in ${getConfigDir()}/marvin-cli.json.
+        stored in localStorage.
 
         There is no default fullAccessToken. marvin-cli will exit with an error
         if you try to use an endpoint that requires a fullAccessToken unless

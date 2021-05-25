@@ -1,4 +1,5 @@
 #!/bin/bash
 
 # This script is used to run marvin-cli from source during development.
-deno run --allow-env --allow-net --allow-read --allow-write index.ts "$@"
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
+deno run --allow-env --allow-net --location "https://cli.amazingmarvin.com" --allow-read --allow-write $DIR/index.ts "$@"

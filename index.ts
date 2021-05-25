@@ -1,5 +1,5 @@
 import { parse } from "./deps.ts";
-import { getOptions, setOptions } from "./options.ts";
+import { setOptions } from "./options.ts";
 import { Params, Options } from "./types.ts";
 
 import add from "./commands/add.ts";

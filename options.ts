@@ -24,23 +24,16 @@ export const globalOptionHelp = `
         desktop app and falls back to using Marvin's public API.
 `;
 
-export function getConfigDir(): string {
-  const { os } = Deno.build;
-
-  if (os === "darwin") {
-    const homeDir = Deno.env.get("HOME");
-    return homeDir ? `${homeDir}/Library/Preferences` : "";
-  } else if (os === "windows") {
-    return Deno.env.get("FOLDERID_RoamingAppData") || "";
-  } else {
-    const xdgHome = Deno.env.get("XDG_CONFIG_HOME");
-    if (xdgHome) {
-      return xdgHome;
-    }
-
-    const homeDir = Deno.env.get("HOME");
-    return homeDir ? `${homeDir}/.config` : "";
+function getSavedVal(key: string):number|string|boolean|null {
+  const val = localStorage.getItem(key) || null;
+  if (!val) {
+    return val;
   }
+  const parsedVal = JSON.parse(val);
+  if (typeof parsedVal === "number" || typeof parsedVal === "string" || typeof parsedVal === "boolean") {
+    return parsedVal;
+  }
+  return null;
 }
 
 let opt: ResolvedOptions;
@@ -58,41 +51,44 @@ export function setOptions(cmdOpt: Options) {
   };
 
   try {
-    const configDir = getConfigDir();
-    const configFile = path.join(configDir, "marvin-cli.json");
-    const json = Deno.readTextFileSync(configFile);
-    const config = JSON.parse(json);
-
-    if (typeof config.port === "number") {
-      opt.port = config.port;
+    const savedPort = getSavedVal("port");
+    if (typeof savedPort === "number") {
+      opt.port = savedPort;
     }
 
-    if (typeof config.publicPort === "number") {
-      opt.publicPort = config.publicPort;
+    const savedPublicPort = getSavedVal("publicPort");
+    if (typeof savedPublicPort === "number") {
+      opt.publicPort = savedPublicPort;
     }
 
-    if (typeof config.host === "string") {
-      opt.host = config.host;
+    const savedHost = getSavedVal("host");
+    if (typeof savedHost === "string") {
+      opt.host = savedHost;
     }
 
-    if (typeof config.publicHost === "string") {
-      opt.publicHost = config.publicHost;
+    const savedPublicHost = getSavedVal("publicHost");
+    if (typeof savedPublicHost === "string") {
+      opt.publicHost = savedPublicHost;
     }
 
-    if (typeof config.apiToken === "string") {
-      opt.apiToken = config.apiToken;
+    const savedApiToken = getSavedVal("apiToken");
+    if (typeof savedApiToken === "string") {
+      opt.apiToken = savedApiToken;
     }
 
-    if (typeof config.fullAccessToken === "string") {
-      opt.fullAccessToken = config.fullAccessToken;
+    const savedFullAccessToken = getSavedVal("fullAccessToken");
+    if (typeof savedFullAccessToken === "string") {
+      opt.fullAccessToken = savedFullAccessToken;
     }
 
-    if (config.target === "desktop" || config.target === "public" || config.target === "default") {
-      opt.target = config.target;
+    const savedTarget = getSavedVal("target");
+    if (savedTarget === "desktop" || savedTarget === "public" || savedTarget === "default") {
+      opt.target = savedTarget;
     }
 
-    if (typeof config.quiet === "boolean") {
-      opt.quiet = config.quiet;
+    const savedQuiet = getSavedVal("quiet");
+    if (typeof savedQuiet === "boolean") {
+      opt.quiet = savedQuiet;
     }
   } catch (err) { // eslint-disable-line
     // Probably config file doesn't exist
