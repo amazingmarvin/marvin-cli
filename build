@@ -1,3 +1,3 @@
 #!/bin/bash
 
-deno compile --unstable --allow-env --allow-net --allow-read --allow-write index.ts
+cd src && deno compile --output ../marvin-cli --location 'https://cli.amazingmarvin.com' --unstable --allow-env --allow-net --allow-read --allow-write index.ts
