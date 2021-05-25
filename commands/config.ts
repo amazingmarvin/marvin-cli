@@ -72,7 +72,7 @@ export default async function config(params: Params, cmdOpt: Options) {
 
   localStorage.setItem(key, JSON.stringify(val));
   if (!options.quiet) {
-    console.log(`Saved ${key}=${val}`);
+    console.log(`Saved ${key}`);
   }
   Deno.exit(0);
 }
