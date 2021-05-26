@@ -1,5 +1,5 @@
 import { parse } from "./deps.ts";
-import { setOptions } from "./options.ts";
+import { getOptions, setOptions } from "./options.ts";
 import { Params, Options } from "./types.ts";
 
 import add from "./commands/add.ts";
@@ -84,6 +84,27 @@ const {
   ...cmdOpt
 } = cmdArgs;
 setOptions(cmdOpt);
+
+const desktopOnly = [
+  "run",
+  "quickAdd",
+  "list",
+  "backup",
+  "restore",
+  "quit",
+];
+
+// For desktop-only commands, error out if user tries to run against public
+// API.
+if (desktopOnly.indexOf(command.toString()) !== -1) {
+  const opt = getOptions();
+  if (opt.target === "public") {
+    console.error(`The command "${command}" is only available on desktop.`);
+    console.error(`Try running with --desktop`);
+  } else if (opt.target === "default") {
+    opt.target = "desktop";
+  }
+}
 
 if (command in commands) {
   commands[command.toString()](params, cmdOpt);
