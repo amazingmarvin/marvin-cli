@@ -9,7 +9,7 @@ export default async function list(params: Params, cmdOpt: Options) {
     Deno.exit(0);
   }
 
-  const res = await get(`/api/list?filter=${encodeURIComponent(cmdOpt.filter || "")}`, { });
+  const res = await get(`/api/list?filter=${encodeURIComponent(cmdOpt.filter || "")}&done=${cmdOpt.done}`, { });
 
   const items = await res.json();
 

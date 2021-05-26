@@ -48,6 +48,7 @@ const cmdArgs = parse(Deno.args, {
     "csv", // CSV output
     "text", // text output
     "version",
+    "done", // List completed tasks
   ],
   string: [
     "file",
