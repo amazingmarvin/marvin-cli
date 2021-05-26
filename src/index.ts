@@ -7,6 +7,7 @@ import api from "./commands/api.ts";
 import backup from "./commands/backup.ts";
 import config from "./commands/config.ts";
 import help from "./commands/help.ts";
+import list from "./commands/list.ts";
 import ping from "./commands/ping.ts";
 import profile from "./commands/profile.ts";
 import quickAdd from "./commands/quickAdd.ts";
@@ -21,6 +22,7 @@ const commands: Record<string, (params: Params, options: Options) => Promise<voi
   backup,
   config,
   help,
+  list,
   ping,
   profile,
   quickAdd,
@@ -52,6 +54,7 @@ const cmdArgs = parse(Deno.args, {
     "api-token",
     "full-access-token",
     "output",
+    "filter", // Supply an advanced filter
   ],
 });
 
@@ -146,6 +149,7 @@ COMMANDS:
 DESKTOP COMMANDS:
     run      - Start the desktop app
     quickAdd - Open desktop quick add
+    list     - List Tasks/Projects, optionally filtered
     backup   - Trigger backups
     restore  - Restore backups
     quit     - Shut down the app
