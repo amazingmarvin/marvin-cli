@@ -1,7 +1,7 @@
 import { get } from "../apiCall.ts";
 import { getCSVHeader, toCSV } from "../csv.ts";
 import { Params, Options } from "../types.ts";
-import { globalOptionHelp } from "../options.ts";
+import { globalFormatHelp, globalOptionHelp } from "../options.ts";
 
 export default async function today(params: Params, cmdOpt: Options) {
   if (cmdOpt.help) {
@@ -42,16 +42,6 @@ EXAMPLE:
     $ marvin today
 
 OPTIONS:
-    --json
-        Output JSON (this is the default). See
-        https://github.com/amazingmarvin/MarvinAPI/wiki/Marvin-Data-Types for
-        field documentation.
-
-    --csv
-        Output CSV. The output format is subject to change and isn't the same
-        as regular CSV output from Marvin!
-
-    --text
-        Output plain text (just titles).
+${globalFormatHelp}
 ${globalOptionHelp}
 `.trim();

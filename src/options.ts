@@ -22,7 +22,21 @@ export const globalOptionHelp = `
 
         By default marvin-cli attempts to communicate with the Amazing Marvin
         desktop app and falls back to using Marvin's public API.
-`;
+`.trimEnd();
+
+export const globalFormatHelp = `
+    --json
+        Output JSON (this is the default). See
+        https://github.com/amazingmarvin/MarvinAPI/wiki/Marvin-Data-Types for
+        field documentation.
+
+    --csv
+        Output CSV. The output format is subject to change and isn't the same
+        as regular CSV output from Marvin!
+
+    --text
+        Output plain text (just titles).
+`.trimEnd();
 
 function getSavedVal(key: string):number|string|boolean|null {
   const val = localStorage.getItem(key) || null;

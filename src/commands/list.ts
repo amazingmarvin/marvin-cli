@@ -1,7 +1,7 @@
 import { get } from "../apiCall.ts";
 import { getCSVHeader, toCSV } from "../csv.ts";
 import { Params, Options } from "../types.ts";
-import { globalOptionHelp } from "../options.ts";
+import { globalFormatHelp, globalOptionHelp } from "../options.ts";
 
 export default async function list(params: Params, cmdOpt: Options) {
   if (cmdOpt.help) {
@@ -33,25 +33,26 @@ export default async function list(params: Params, cmdOpt: Options) {
 }
 
 export const listHelp = `
-marvin today # List Tasks/Projects scheduled today
-marvin today --json # ... in JSON format (default)
-marvin today --csv # ... in CSV format
-marvin today --text # ... in plain text format
-
 List or filter all open Tasks/Projects.
 
 EXAMPLE:
     # List all tasks/projects
     $ marvin list
 
-    # List all tasks as CSV
-    $ marvin list --csv
+    # List all completed tasks as CSV. Note: Tasks/Projects completed more than
+    # 6 weeks ago will not be shown unless your desktop app is in archive mode.
+    $ marvin list --done --csv
 
-    # List starred tasks
+    # List starred Tasks
     $ marvin list --filter "type:task *isStarred &&"
 
 OPTIONS:
-    -f, --file=<path>
-        Read JSON/text from file. Use - for stdin.
+    --done
+        Show completed items instead of open items.
+
+    --filter "..."
+        Use an advanced filter to show matching items. For documentation, see
+        https://help.amazingmarvin.com/en/articles/2070779-advanced-smart-list-filters
+${globalFormatHelp}
 ${globalOptionHelp}
 `.trim();
