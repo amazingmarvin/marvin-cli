@@ -24,6 +24,27 @@ desktop.
 So marvin-cli can either communicate with the public API or a desktop app
 instance.
 
+# Commands
+
+```
+COMMANDS:
+    api    - View API docs
+    config - Get/set config values for marvin-cli
+    add    - Add a Task, Project, or other
+    today  - List Tasks and Projects that are scheduled today
+    update - Update a Task, Project, or other (not yet implemented)
+    delete - Delete a Task, Project, or other (not yet implemented)
+    help   - Help about any command
+
+DESKTOP COMMANDS:
+    run      - Start the desktop app (not yet implemented)
+    quickAdd - Open desktop quick add
+    list     - List Tasks/Projects, optionally filtered
+    backup   - Trigger backups (not yet implemented)
+    restore  - Restore backups (not yet implemented)
+    quit     - Shut down the app (not yet implemented)
+```
+
 # Installation
 
 Note: the build is currently broken. See https://github.com/denoland/deno/issues/10693
