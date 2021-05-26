@@ -33,25 +33,25 @@ export default async function today(params: Params, cmdOpt: Options) {
 }
 
 export const todayHelp = `
-marvin today # List Tasks/Projects scheduled today
-marvin today --json # ... in JSON format (default)
-marvin today --csv # ... in CSV format
-marvin today --text # ... in plain text format
+marvin today
 
-Create a Task or Project.
+List all Tasks/Projects scheduled today. Items completed today are not included.
 
 EXAMPLE:
-    # Add a task
-    $ marvin add task "Go to the store at 11:00 +today @chore"
-
-    # Add an arbitrary item (by supplying JSON).
-    $ marvin add --file=./task.json
-
-    # Pipe JSON to stdin to create project
-    $ cat project.json | marvin add -f -
+    # List Tasks/Projects scheduled today
+    $ marvin today
 
 OPTIONS:
-    -f, --file=<path>
-        Read JSON/text from file. Use - for stdin.
+    --json
+        Output JSON (this is the default). See
+        https://github.com/amazingmarvin/MarvinAPI/wiki/Marvin-Data-Types for
+        field documentation.
+
+    --csv
+        Output CSV. The output format is subject to change and isn't the same
+        as regular CSV output from Marvin!
+
+    --text
+        Output plain text (just titles).
 ${globalOptionHelp}
 `.trim();
