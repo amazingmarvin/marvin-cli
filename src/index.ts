@@ -67,6 +67,7 @@ if (cmdArgs.version) {
 // Print simple help if run without command.
 if (cmdArgs._.length === 0 && cmdArgs.help) {
   printHelp();
+  Deno.exit(0);
 } else if (cmdArgs._.length === 0) {
   console.log(`
 marvin-cli
