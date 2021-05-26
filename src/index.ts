@@ -100,7 +100,7 @@ const desktopOnly = [
 
 // For desktop-only commands, error out if user tries to run against public
 // API.
-if (desktopOnly.indexOf(command.toString()) !== -1) {
+if (desktopOnly.indexOf((command || "").toString()) !== -1) {
   const opt = getOptions();
   if (opt.target === "public") {
     console.error(`The command "${command}" is only available on desktop.`);
