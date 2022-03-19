@@ -47,10 +47,6 @@ DESKTOP COMMANDS:
 
 # Installation
 
-Note: the build is currently broken. See https://github.com/denoland/deno/issues/10693. You can still use this tool, just not from a single executable. Instead, clone this repository and run the `marvin` bash script in the root of the repository.
-
-How it's supposed to work:
-
 * Install deno
 * Clone repository
 * `./build`
