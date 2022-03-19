@@ -106,7 +106,7 @@ export function setOptions(cmdOpt: Options) {
       opt.quiet = savedQuiet;
     }
   } catch (err) { // eslint-disable-line
-    // Probably config file doesn't exist
+    console.error("Failed to read", err);
   }
 
   if (typeof cmdOpt.port === "number") {
