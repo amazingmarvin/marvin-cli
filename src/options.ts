@@ -1,4 +1,5 @@
 import { path } from "./deps.ts";
+import * as localStorage from "./localStorage.ts";
 import { Options, ResolvedOptions } from "./types.ts";
 
 export const globalOptionHelp = `

@@ -1,5 +1,6 @@
 import { existsSync, path } from "../deps.ts";
 import { getOptions } from "../options.ts";
+import * as localStorage from "../localStorage.ts";
 import { Params, Options } from "../types.ts";
 
 const whitelist = [
@@ -99,7 +100,10 @@ PROPERTIES:
 
     marvin config apiToken <your api token>
         Use the given API token by default so that you don't have to enter it
-        with each use of marvin-cli. This is stored in localStorage.
+        with each use of marvin-cli. This is stored in marvin-cli.json in your
+        config dir. This is $XDG_CONFIG_HOME or ~/.config on linux,
+        ~/Library/Preferences on mac, or %APPDATA% on windows
+        (C:\\Users\\you\\AppData\\Roaming).
 
         There is no default apiToken. marvin-cli will exit with an error
         unless you supply it with the --api-token option with each run, or here
@@ -108,7 +112,7 @@ PROPERTIES:
     marvin config fullAccessToken <your full access token>
         Use the given full access token by default so that you don't have to
         enter it with each use of an API endpoint that requires it. This is
-        stored in localStorage.
+        stored in your config dir. See above for more info.
 
         There is no default fullAccessToken. marvin-cli will exit with an error
         if you try to use an endpoint that requires a fullAccessToken unless
