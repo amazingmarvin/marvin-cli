@@ -25,14 +25,51 @@ export default async function config(params: Params, cmdOpt: Options) {
   }
 
   if (params.length === 0) {
-    console.log(`port: ${options.port}`);
-    console.log(`host: ${options.host}`);
-    console.log(`publicPort: ${options.publicPort}`);
-    console.log(`publicHost: ${options.publicHost}`);
-    console.log(`apiToken: ${(options.apiToken || "").replace(/.{20}$/, "...")}`);
-    console.log(`fullAccessToken: ${(options.fullAccessToken || "").replace(/.{20}$/, "...")}`);
-    console.log(`target: ${options.target}`);
-    console.log(`quiet: ${options.quiet}`);
+    let {
+      port,
+      host,
+      publicPort,
+      publicHost,
+      apiToken,
+      fullAccessToken,
+      target,
+      quiet,
+    } = options;
+
+    if (!apiToken) {
+      apiToken = "";
+    }
+    if (!fullAccessToken) {
+      fullAccessToken = "";
+    }
+
+    if (!cmdOpt["with-secrets"]) {
+      apiToken = apiToken.replace(/.{20}$/, "...");
+      fullAccessToken = fullAccessToken.replace(/.{20}$/, "...");
+    }
+
+    if (cmdOpt.json) {
+      console.log(JSON.stringify({
+        port,
+        host,
+        publicPort,
+        publicHost,
+        apiToken,
+        fullAccessToken,
+        target,
+        quiet,
+      }, null, 2));
+    } else {
+      console.log(`port: ${port}`);
+      console.log(`host: ${host}`);
+      console.log(`publicPort: ${publicPort}`);
+      console.log(`publicHost: ${publicHost}`);
+      console.log(`apiToken: ${apiToken}`);
+      console.log(`fullAccessToken: ${fullAccessToken}`);
+      console.log(`target: ${target}`);
+      console.log(`quiet: ${quiet}`);
+    }
+
     Deno.exit(0);
   }
 
@@ -132,4 +169,13 @@ PROPERTIES:
 
     marvin config quiet true|false
         If true, then marvin-cli will suppress diagnostic output.
+
+OPTIONS:
+  --json
+      When using "marvin config --json", your config settings are printed in
+      JSON instead of "key: value" lines.
+
+  --with-secrets
+      When using "marvin config --with-secrets", your apiToken and
+      fullAccessToken are printed to stdout. Otherwise they are elided.
 `.trim();

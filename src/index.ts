@@ -45,6 +45,7 @@ const cmdArgs = parse(Deno.args, {
     "desktop", // Connect to desktop or fail (default is desktop with public API fallback)
     "public", // Don't attempt to connect to desktop (default is desktop with public API fallback)
     "json", // JSON output
+    "with-secrets",
     "csv", // CSV output
     "text", // text output
     "version",
