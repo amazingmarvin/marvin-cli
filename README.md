@@ -49,7 +49,5 @@ DESKTOP COMMANDS:
 
 * Install deno
 * Clone repository
-* `./build`
-* Copy `marvin-cli` to your path
-
-Binaries will be provided in the future.
+* Run `./build` (or `BUILD.bat` on windows)
+* Copy `marvin-cli` (or `marvin-cli.exe on windows) to your path

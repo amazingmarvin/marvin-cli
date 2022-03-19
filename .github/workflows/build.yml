@@ -1,0 +1,53 @@
+name: Build binaries
+
+on:
+  push:
+    tags:
+      - v*
+
+  # Allow running from Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extract version
+        id: getVersion
+        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+
+      - name: Checkout source
+        uses: actions/checkout@v2
+
+      - name: Install Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Build
+        run: ./build-all
+
+      - name: Upload binary (Linux)
+        uses: actions/upload-artifact@master
+        with:
+          name: marvin-cli-linux
+          path: ./out/linux/marvin-cli
+
+      - name: Upload binary (MacOS)
+        uses: actions/upload-artifact@master
+        with:
+          name: marvin-cli-macos
+          path: ./out/macos/marvin-cli
+
+      - name: Upload binary (MacOS Arm)
+        uses: actions/upload-artifact@master
+        with:
+          name: marvin-cli-macos-arm
+          path: ./out/macos-arm/marvin-cli
+
+      - name: Upload binary (Windows)
+        uses: actions/upload-artifact@master
+        with:
+          name: marvin-cli-win.exe
+          path: ./out/windows/marvin-cli.exe
