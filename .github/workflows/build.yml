@@ -28,26 +28,58 @@ jobs:
       - name: Build
         run: ./build-all
 
-      - name: Upload binary (Linux)
-        uses: actions/upload-artifact@master
+      - name: Create Release Text
+        run: awk -v RS= '/a/ { print; exit }' CHANGELOG.md > RELEASE.md
+
+      - name: Create a Release
+        uses: actions/create-release@v1
+        id: makeRelease
         with:
-          name: marvin-cli-linux
-          path: ./out/linux/marvin-cli
+          draft: false
+          prerelease: false
+          release_name: ${{ steps.getVersion.outputs.VERSION }}
+          tag_name: ${{ github.ref }}
+          body_path: RELEASE.md
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Upload binary (Linux)
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.makeRelease.outputs.upload_url }}
+          asset_name: marvin-cli-linux
+          asset_path: ./out/linux/marvin-cli
+          asset_content_type: application/octet-stream
 
       - name: Upload binary (MacOS)
-        uses: actions/upload-artifact@master
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         with:
-          name: marvin-cli-macos
-          path: ./out/macos/marvin-cli
+          upload_url: ${{ steps.makeRelease.outputs.upload_url }}
+          asset_name: marvin-cli-macos
+          asset_path: ./out/macos/marvin-cli
+          asset_content_type: application/octet-stream
 
       - name: Upload binary (MacOS Arm)
-        uses: actions/upload-artifact@master
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         with:
-          name: marvin-cli-macos-arm
-          path: ./out/macos-arm/marvin-cli
+          upload_url: ${{ steps.makeRelease.outputs.upload_url }}
+          asset_name: marvin-cli-macos-arm
+          asset_path: ./out/macos-arm/marvin-cli
+          asset_content_type: application/octet-stream
 
       - name: Upload binary (Windows)
-        uses: actions/upload-artifact@master
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         with:
-          name: marvin-cli-win.exe
-          path: ./out/windows/marvin-cli.exe
+          upload_url: ${{ steps.makeRelease.outputs.upload_url }}
+          asset_name: marvin-cli-win.exe
+          asset_path: ./out/windows/marvin-cli.exe
+          asset_content_type: application/octet-stream
+

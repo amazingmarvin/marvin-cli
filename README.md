@@ -47,7 +47,11 @@ DESKTOP COMMANDS:
 
 # Installation
 
+Download a release for your platform [here](https://github.com/amazingmarvin/marvin-cli/releases).
+
+# Building
+
 * Install deno
 * Clone repository
 * Run `./build` (or `BUILD.bat` on windows)
-* Copy `marvin-cli` (or `marvin-cli.exe on windows) to your path
+* Copy `marvin-cli` (or `marvin-cli.exe` on windows) to your path
