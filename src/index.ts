@@ -14,7 +14,7 @@ import quickAdd from "./commands/quickAdd.ts";
 import restore from "./commands/restore.ts";
 import today from "./commands/today.ts";
 
-const VERSION = "0.3.0";
+const VERSION = "0.4.0";
 
 const commands: Record<string, (params: Params, options: Options) => Promise<void>> = {
   add,
