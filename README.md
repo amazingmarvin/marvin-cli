@@ -55,3 +55,7 @@ Download a release for your platform [here](https://github.com/amazingmarvin/mar
 * Clone repository
 * Run `./build` (or `BUILD.bat` on windows)
 * Copy `marvin-cli` (or `marvin-cli.exe` on windows) to your path
+
+# Configuring
+
+Get your apiToken from https://app.amazingmarvin.com/pre?api then run marvin config apiToken XYZ" or pass the --api-token command line option.
