@@ -17,9 +17,10 @@ marvin add task "Example +today"
 ```
 
 But even more importantly, until now scripting wasn't possible for desktop
-users who disable cloud sync. As of 1.60.0 you can run a local API server which
-serves a subset of the public API, plus some bonus commands that only work on
-desktop.
+users who disable cloud sync. As of 1.60.0 you can run a
+[local API server](https://help.amazingmarvin.com/en/articles/5165191-desktop-local-api-server)
+which serves a subset of the public API, plus some bonus commands that only
+work on desktop.
 
 So marvin-cli can either communicate with the public API or a desktop app
 instance.
@@ -55,3 +56,7 @@ Download a release for your platform [here](https://github.com/amazingmarvin/mar
 * Clone repository
 * Run `./build` (or `BUILD.bat` on windows)
 * Copy `marvin-cli` (or `marvin-cli.exe` on windows) to your path
+
+# Configuring
+
+Get your apiToken from https://app.amazingmarvin.com/pre?api then run marvin config apiToken XYZ" or pass the --api-token command line option.
