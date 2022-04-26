@@ -59,4 +59,4 @@ Download a release for your platform [here](https://github.com/amazingmarvin/mar
 
 # Configuring
 
-Get your apiToken from https://app.amazingmarvin.com/pre?api then run marvin config apiToken XYZ" or pass the --api-token command line option.
+Get your API Token from https://app.amazingmarvin.com/pre?api (or find it in the API strategy settings) then run `marvin config apiToken XYZ` or use the `--api-token` command line option.
