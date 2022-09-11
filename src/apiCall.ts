@@ -69,10 +69,10 @@ async function apiCall(endpoint: string, headers: Record<string, string>, extraO
   return Promise.reject(error);
 }
 
-export async function get(endpoint: string, headers: Record<string, string>) {
+export async function GET(endpoint: string, headers: Record<string, string>) {
   return apiCall(endpoint, headers, { method: "GET" });
 }
 
-export function post(endpoint: string, body: string, headers: Record<string, string>) {
+export function POST(endpoint: string, body: string, headers: Record<string, string>) {
   return apiCall(endpoint, headers, { method: "POST", body });
 }

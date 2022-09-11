@@ -1,4 +1,4 @@
-import { get } from "../apiCall.ts";
+import { GET } from "../apiCall.ts";
 import { getCSVHeader, toCSV } from "../csv.ts";
 import { Params, Options } from "../types.ts";
 import { globalFormatHelp, globalOptionHelp } from "../options.ts";
@@ -9,7 +9,7 @@ export default async function today(params: Params, cmdOpt: Options) {
     Deno.exit(0);
   }
 
-  const res = await get("/api/todayItems", { });
+  const res = await GET("/api/todayItems", { });
 
   const items = await res.json();
 

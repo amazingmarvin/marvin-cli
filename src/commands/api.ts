@@ -1,4 +1,3 @@
-import { get } from "../apiCall.ts";
 import { globalOptionHelp } from "../options.ts";
 import { Params, Options, APIEndpoint } from "../types.ts";
 

@@ -1,4 +1,4 @@
-import { get } from "../apiCall.ts";
+import { GET } from "../apiCall.ts";
 import { getCSVHeader, toCSV } from "../csv.ts";
 import { Params, Options } from "../types.ts";
 import { globalFormatHelp, globalOptionHelp } from "../options.ts";
@@ -9,7 +9,7 @@ export default async function list(params: Params, cmdOpt: Options) {
     Deno.exit(0);
   }
 
-  const res = await get(`/api/list?filter=${encodeURIComponent(cmdOpt.filter || "")}&done=${cmdOpt.done}`, { });
+  const res = await GET(`/api/list?filter=${encodeURIComponent(cmdOpt.filter || "")}&done=${cmdOpt.done}`, { });
 
   const items = await res.json();
 

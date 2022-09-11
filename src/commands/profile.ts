@@ -1,4 +1,4 @@
-import { get } from "../apiCall.ts";
+import { GET } from "../apiCall.ts";
 import { globalOptionHelp } from "../options.ts";
 import { printResult } from "../printResult.ts";
 import { Params, Options } from "../types.ts";
@@ -15,7 +15,7 @@ export default async function profile(params: Params, cmdOpt: Options) {
   }
 
   try {
-    const res = await get("/api/me", { });
+    const res = await GET("/api/me", { });
     await printResult(res);
     Deno.exit(0);
   } catch (err) {

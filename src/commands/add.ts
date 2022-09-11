@@ -1,4 +1,4 @@
-import { post } from "../apiCall.ts";
+import { POST } from "../apiCall.ts";
 import { globalOptionHelp } from "../options.ts";
 import { printResult } from "../printResult.ts";
 import { Params, Options } from "../types.ts";
@@ -38,7 +38,7 @@ export default async function add(params: Params, cmdOpt: Options) {
         } catch (err) { } // eslint-disable-line
       }
 
-      const res = await post(endpoint, text, { "Content-Type": contentType });
+      const res = await POST(endpoint, text, { "Content-Type": contentType });
       await printResult(res);
       Deno.exit(0);
     } catch (err) {
@@ -66,7 +66,7 @@ export default async function add(params: Params, cmdOpt: Options) {
     // Add a task by title.
     try {
       const taskTitle = params.length === 1 ? params[0].toString() : params[1].toString();
-      const res = await post("/api/addTask", taskTitle, { "Content-Type": "text/plain" });
+      const res = await POST("/api/addTask", taskTitle, { "Content-Type": "text/plain" });
       await printResult(res);
       Deno.exit(0);
     } catch (err) {
@@ -78,7 +78,7 @@ export default async function add(params: Params, cmdOpt: Options) {
   // marvin add project "example due tomorrow"
   if (params.length === 2 && params[0] === "project") {
     try {
-      const res = await post("/api/addProject", params[1].toString(), { "Content-Type": "text/plain" });
+      const res = await POST("/api/addProject", params[1].toString(), { "Content-Type": "text/plain" });
       await printResult(res);
       Deno.exit(0);
     } catch (err) {
