@@ -1,3 +1,7 @@
+# 0.5.0 (2022-09-11)
+* Added "due" command
+* Added "get" command
+
 # 0.4.0 (2022-03-21)
 * Added Release binaries
 
