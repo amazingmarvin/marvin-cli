@@ -29,13 +29,16 @@ instance.
 
 ```
 COMMANDS:
-    api    - View API docs
-    config - Get/set config values for marvin-cli
-    add    - Add a Task, Project, or other
-    today  - List Tasks and Projects that are scheduled today
-    update - Update a Task, Project, or other (not yet implemented)
-    delete - Delete a Task, Project, or other (not yet implemented)
-    help   - Help about any command
+    api      - View API docs
+    config   - Get/set config values for marvin-cli
+    add      - Add a Task, Project, or other
+    due      - Get open Tasks & Projects due today (or earlier)
+    get      - Read an arbitrary document from your database
+    today    - List Tasks and Projects that are scheduled today
+    tracking - Get the currently tracked task
+    update   - Update a Task, Project, or other (not yet implemented)
+    delete   - Delete a Task, Project, or other (not yet implemented)
+    help     - Help about any command
 
 DESKTOP COMMANDS:
     run      - Start the desktop app (not yet implemented)
