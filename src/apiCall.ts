@@ -10,13 +10,34 @@ async function apiCall(endpoint: string, headers: Record<string, string>, extraO
 
   let errorMessage;
 
+  let tokenName: string, token: string;
+  if (needsFullAccess(endpoint)) {
+    tokenName = "X-Full-Access-Token";
+    if (opt.fullAccessToken) {
+      token = opt.fullAccessToken;
+    } else {
+      throw new Error("Full access needed. Use `marvin config fullAccessToken YOUR_TOKEN`.");
+    }
+  } else {
+    tokenName = "X-API-Token";
+    if (opt.apiToken) {
+      token = opt.apiToken;
+    } else {
+      throw new Error("API token needed. Use `marvin config apiToken YOUR_TOKEN`.");
+    }
+  }
+
+  if (!token) {
+    throw new Error("Missing token");
+  }
+
   // First try desktop
   if (opt.target !== "public") {
     try {
       const res = await fetch(`http://${opt.host}:${opt.port}${endpoint}`, {
         ...extraOptions,
         headers: {
-          "X-API-Token": opt.apiToken,
+          [tokenName]: token,
           ...headers,
         },
       });
@@ -44,7 +65,7 @@ async function apiCall(endpoint: string, headers: Record<string, string>, extraO
       const res = await fetch(`${scheme}//${opt.publicHost}:${opt.publicPort}${endpoint}`, {
         ...extraOptions,
         headers: {
-          "X-API-Token": opt.apiToken,
+          [tokenName]: token,
           ...headers,
         },
       });
@@ -75,4 +96,12 @@ export async function GET(endpoint: string, headers: Record<string, string>) {
 
 export function POST(endpoint: string, body: string, headers: Record<string, string>) {
   return apiCall(endpoint, headers, { method: "POST", body });
+}
+
+function needsFullAccess(endpoint: string): boolean {
+  if (endpoint.startsWith("/api/doc")) {
+    return true;
+  }
+
+  return false;
 }
