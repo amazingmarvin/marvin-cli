@@ -1,4 +1,4 @@
-import { existsSync, path } from "./deps.ts";
+import { existsSync, moveSync, path } from "./deps.ts";
 
 const storageFile = "marvin-cli.json";
 let storagePath = "";
@@ -12,7 +12,14 @@ case "linux": {
 
   const homeDir = Deno.env.get("HOME");
   if (homeDir) {
-    storagePath = path.join(homeDir, storageFile);
+    storagePath = path.join(homeDir, ".config", storageFile);
+
+    // Mistakenly defaulted to ~/marvin-cli.json.
+    const oldStoragePath = path.join(homeDir, storageFile);
+    if (!existsSync(storagePath) && existsSync(oldStoragePath)) {
+      moveSync(oldStoragePath, storagePath);
+    }
+
     break;
   }
 
