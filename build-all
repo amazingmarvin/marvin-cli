@@ -2,8 +2,8 @@
 
 mkdir -p out/linux out/macos out/macos-arm out/windows
 cd src
-deno compile --target x86_64-unknown-linux-gnu --output ../out/linux/marvin-cli --location "https://cli.amazingmarvin.com" --unstable --allow-env --allow-net --allow-read --allow-write index.ts
-deno compile --target x86_64-apple-darwin --output ../out/macos/marvin-cli --location "https://cli.amazingmarvin.com" --unstable --allow-env --allow-net --allow-read --allow-write index.ts
-deno compile --target aarch64-apple-darwin --output ../out/macos-arm/marvin-cli --location "https://cli.amazingmarvin.com" --unstable --allow-env --allow-net --allow-read --allow-write index.ts
-deno compile --target x86_64-pc-windows-msvc --output ../out/windows/marvin-cli.exe --location "https://cli.amazingmarvin.com" --unstable --allow-env --allow-net --allow-read --allow-write index.ts
+deno compile --target x86_64-unknown-linux-gnu --output ../out/linux/marvin-cli --location "https://cli.amazingmarvin.com" --allow-env --allow-net --allow-read --allow-write index.ts
+deno compile --target x86_64-apple-darwin --output ../out/macos/marvin-cli --location "https://cli.amazingmarvin.com" --allow-env --allow-net --allow-read --allow-write index.ts
+deno compile --target aarch64-apple-darwin --output ../out/macos-arm/marvin-cli --location "https://cli.amazingmarvin.com" --allow-env --allow-net --allow-read --allow-write index.ts
+deno compile --target x86_64-pc-windows-msvc --output ../out/windows/marvin-cli.exe --location "https://cli.amazingmarvin.com" --allow-env --allow-net --allow-read --allow-write index.ts
 cd ..
