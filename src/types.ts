@@ -1,7 +1,8 @@
 // Command line args (other than flags/options).
 export type Params = (string | number)[];
 
-// Raw options as they come in from command line.
+// Raw options as they come in from command line, once we have filtered out any
+// items with type "unknown".
 export type Options = Record<string, string|boolean|number>;
 
 // Final options: populated by config file, and then possibly overwritten by

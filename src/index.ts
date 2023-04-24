@@ -95,7 +95,18 @@ const {
   _: [command, ...params],
   ...cmdOpt
 } = cmdArgs;
-setOptions(cmdOpt);
+
+const knownOpt: Options = { };
+for (const key in cmdOpt) {
+  const val: string|boolean|number|unknown = cmdOpt[key];
+  if (typeof val === "string" || typeof val === "boolean" || typeof val === "number") {
+    knownOpt[key] = val;
+  } else {
+    console.log("Ignoring unknown option", key);
+  }
+}
+
+setOptions(knownOpt);
 
 const desktopOnly = [
   "run",
@@ -119,7 +130,7 @@ if (desktopOnly.indexOf((command || "").toString()) !== -1) {
 }
 
 if (command in commands) {
-  commands[command.toString()](params, cmdOpt);
+  commands[command.toString()](params, knownOpt);
 } else {
   printHelp();
   Deno.exit(1);
