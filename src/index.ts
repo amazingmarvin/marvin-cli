@@ -17,7 +17,7 @@ import restore from "./commands/restore.ts";
 import today from "./commands/today.ts";
 import tracking from "./commands/tracking.ts";
 
-const VERSION = "0.5.0";
+const VERSION = "0.5.1";
 
 const commands: Record<string, (params: Params, options: Options) => Promise<void>> = {
   add,

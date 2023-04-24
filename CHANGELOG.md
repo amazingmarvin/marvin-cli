@@ -1,3 +1,7 @@
+# 0.5.1 (2023-03-24)
+* Fixed default marvin-cli.json location on linux
+* Updated deno and dependencies
+
 # 0.5.0 (2022-09-11)
 * Added "due" command
 * Added "get" command
